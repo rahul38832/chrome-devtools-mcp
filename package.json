@@ -1,7 +1,7 @@
 {
-  "name": "chrome-devtools-mcp",
+  "name": "@rahul38832/chrome-devtools-mcp",
   "version": "1.1.1",
-  "description": "MCP server for Chrome DevTools",
+  "description": "Private fork of chrome-devtools-mcp (Chrome DevTools MCP server) for personal browser-automation tooling.",
   "type": "module",
   "bin": {
     "chrome-devtools-mcp": "./build/src/bin/chrome-devtools-mcp.js",
@@ -38,14 +38,17 @@
     "!*.tsbuildinfo",
     "!*.js.map"
   ],
-  "repository": "ChromeDevTools/chrome-devtools-mcp",
+  "repository": "rahul38832/chrome-devtools-mcp",
   "author": "Google LLC",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp/issues"
+    "url": "https://github.com/rahul38832/chrome-devtools-mcp/issues"
   },
-  "homepage": "https://github.com/ChromeDevTools/chrome-devtools-mcp#readme",
-  "mcpName": "io.github.ChromeDevTools/chrome-devtools-mcp",
+  "homepage": "https://github.com/rahul38832/chrome-devtools-mcp#readme",
+  "mcpName": "io.github.rahul38832/chrome-devtools-mcp",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@google/genai": "^2.0.1",
