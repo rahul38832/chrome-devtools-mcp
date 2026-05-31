@@ -1,18 +1,54 @@
+name: release-please
+
 on:
   push:
     branches:
       - main
 
-permissions: read-all
-name: release-please
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
+      # 1) Maintain the release PR; on its merge, cut the tag + GitHub Release.
       - uses: googleapis/release-please-action@v5
+        id: release
         with:
-          token: ${{ secrets.BROWSER_AUTOMATION_BOT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           target-branch: main
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
+
+      # 2) Only when a release was just created: build the bundle and publish
+      #    the self-contained package to this repo's GitHub Packages registry.
+      - uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
+
+      - uses: actions/setup-node@v4
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@rahul38832'
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
+
+      - name: Build self-contained bundle
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm run bundle
+        env:
+          NODE_ENV: production
+
+      - name: Publish to GitHub Packages
+        if: ${{ steps.release.outputs.release_created }}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
