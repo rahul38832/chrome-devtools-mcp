@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/rahul38832/chrome-devtools-mcp/compare/chrome-devtools-mcp-v1.1.1...chrome-devtools-mcp-v1.1.2) (2026-05-31)
+
+
+### 🏗️ Refactor
+
+* use validate files on the tool level ([#2152](https://github.com/rahul38832/chrome-devtools-mcp/issues/2152)) ([2e039c0](https://github.com/rahul38832/chrome-devtools-mcp/commit/2e039c09e1a273581d9b51081a0feb8a57791947)), closes [#2150](https://github.com/rahul38832/chrome-devtools-mcp/issues/2150)
+
 ## [1.1.1](https://github.com/ChromeDevTools/chrome-devtools-mcp/compare/chrome-devtools-mcp-v1.1.0...chrome-devtools-mcp-v1.1.1) (2026-05-27)
 
 
